@@ -1,13 +1,15 @@
-package com.example.androidcurrenciesoftheworld
+package com.example.androidcurrenciesoftheworld.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.example.androidcurrenciesoftheworld.R
 import com.example.androidcurrenciesoftheworld.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
@@ -22,10 +24,18 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view?.postDelayed({ findNavController().navigate(R.id.action_mainFragment_to_secondFragment) }, 3000)
-        binding.root.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_secondFragment)
-        }
+        view.postDelayed(
+            { /*findNavController().navigate(R.id.action_mainFragment_to_secondFragment)*/
+            fragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.container, SecondFragment())
+                ?.commit()
+            },
+            3000
+        )
+//        binding.root.setOnClickListener {
+//            findNavController().navigate(R.id.action_mainFragment_to_secondFragment)
+//        }
     }
 
     override fun onDestroyView() {

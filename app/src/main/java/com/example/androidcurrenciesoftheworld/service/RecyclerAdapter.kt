@@ -1,4 +1,4 @@
-package com.example.androidcurrenciesoftheworld
+package com.example.androidcurrenciesoftheworld.service
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidcurrenciesoftheworld.R
+import com.example.androidcurrenciesoftheworld.model.Currencies
+import javax.inject.Inject
 
-class RecyclerAdapter(
-    val currencies: MutableList<Currencies>,
+
+class RecyclerAdapter (
+//    @Inject val currencies: MutableList<Currencies?>,
 ) : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
+    private var currencies = arrayListOf<Currencies>()
+    fun setCurrencies(currencies: ArrayList<Currencies>){
+        this.currencies = currencies
+        notifyDataSetChanged()
+    }
+
     class RecyclerViewHolder(
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
